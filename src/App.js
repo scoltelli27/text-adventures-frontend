@@ -12,35 +12,45 @@ import EditStory from "./features/stories/EditStory";
 import NewStory from "./features/stories/NewStory";
 import Prefetch from "./features/auth/Prefetch";
 import PersistLogin from "./features/auth/PersistLogin";
-import React from "react";
+import RequireAuth from "./features/auth/RequireAuth";
+import { ROLES } from "./config/roles";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        {/* Public routes */}
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
 
+        {/* Protected routes */}
         <Route element={<PersistLogin />}>
-          <Route element={<Prefetch />}>
-            <Route path="dash" element={<DashLayout />}>
-              <Route index element={<Welcome />} />
+          <Route
+            element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
+          >
+            <Route element={<Prefetch />}>
+              <Route path="dash" element={<DashLayout />}>
+                <Route index element={<Welcome />} />
 
-              <Route path="users">
-                <Route index element={<UsersList />} />
-                <Route path=":id" element={<EditUser />} />
-                <Route path="new" element={<NewUserForm />} />
-              </Route>
+                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                  <Route path="users">
+                    <Route index element={<UsersList />} />
+                    <Route path=":id" element={<EditUser />} />
+                    <Route path="new" element={<NewUserForm />} />
+                  </Route>
+                </Route>
 
-              <Route path="stories">
-                <Route index element={<StoriesList />} />
-                <Route path=":id" element={<EditStory />} />
-                <Route path="new" element={<NewStory />} />
+                <Route path="stories">
+                  <Route index element={<StoriesList />} />
+                  <Route path=":id" element={<EditStory />} />
+                  <Route path="new" element={<NewStory />} />
+                </Route>
               </Route>
-            </Route>{" "}
-            {/* End Dash */}
+              {/* End Dash */}
+            </Route>
           </Route>
         </Route>
+        {/* End protected routes */}
       </Route>
     </Routes>
   );

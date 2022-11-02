@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+
+img{
+  max-width: 100%;
+  display: block;
+}
+
 
 /* || VARIABLES */
 
@@ -25,6 +32,25 @@
 }
 
 /* || UTILITY CLASSES */
+
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+
+.grid {
+  display:grid;
+  gap: var(--gap, 1rem);
+}
+
+.container { 
+  padding-inline: 2em;
+  margin-inline:auto;
+  max-width: 80rem; 
+  margin:auto;
+}
+
+
 .errmsg {
   display: inline-block;
   background-color: var(--TABLE-BGCOLOR);
@@ -62,12 +88,14 @@
 body {
   font-family: 'Nunito', sans-serif;
   min-height: 100vh;
-  background-color: var(--BGCOLOR);
+  background-color: gray;
   color: var(--COLOR);
-  background-image: url('./img/background.jpg');
   background-size: cover;
   background-position: top right;
   background-blend-mode: multiply;
+  margin: 0;
+  line-height: 1.5;
+  
 }
 
 input,
@@ -110,14 +138,41 @@ a:focus-visible {
 .public {
   padding: 1em;
   flex-grow: 1;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  margin: 0 40px;
 }
 
-.public__main,
-.login {
-  flex-grow: 1;
+
+
+ul {
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.logo {
+  width: 2em;
+}
+
+.titles {
+  margin: 30px 0;
+}
+
+h1 {
+  margin: auto !important;
+  max-width: 80vw;
   border-top: 2px solid var(--BORDER-COLOR);
   border-bottom: 2px solid var(--BORDER-COLOR);
-  padding: 1em 0;
+}
+
+.public__main{
+  
+  border: 2px solid var(--BORDER-COLOR);
+  border-radius: 20px;
+  min-height: 100vh;
 }
 
 .public__addr {
@@ -127,6 +182,16 @@ a:focus-visible {
 .welcome a::before {
   content: "➜ "
 }
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  gap: 30%;
+}
+
+
 
 /* || DASH HEADER, CONTAINER & FOOTER */
 
