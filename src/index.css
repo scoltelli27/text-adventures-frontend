@@ -13,6 +13,39 @@ img{
 }
 
 
+/* FONTS */
+@font-face {
+  font-family: 'itc_benguiat_stdbold';
+  src: url('./fonts/benguiatstd-bold-webfont.woff2') format('woff2'),
+       url('./fonts/benguiatstd-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
+
+@font-face {
+  font-family: 'itc_benguiat_stdbook';
+  src: url('./fonts/benguiatstd-book-webfont.woff2') format('woff2'),
+       url('./fonts/benguiatstd-book-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
+
+@font-face {
+  font-family: 'itc_benguiat_stdmedium';
+  src: url('./fonts/benguiatstd-medium-webfont.woff2') format('woff2'),
+       url('./fonts/benguiatstd-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
 /* || VARIABLES */
 
 :root {
@@ -86,7 +119,7 @@ img{
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'itc_benguiat_stdbook';
   min-height: 100vh;
   background-color: gray;
   color: var(--COLOR);
@@ -144,7 +177,11 @@ a:focus-visible {
   margin: 0 40px;
 }
 
-
+.slim__border {
+  border: 7px solid #6B728E;
+  min-height: 100vh;
+  background: linear-gradient(0deg, #00000088 100%, #ffffff44 100%);
+}
 
 ul {
   list-style: none;
@@ -158,20 +195,37 @@ ul {
 }
 
 .titles {
+  
   margin: 30px 0;
 }
 
 h1 {
   margin: auto !important;
-  max-width: 80vw;
+  max-width: 70vw;
   border-top: 2px solid var(--BORDER-COLOR);
   border-bottom: 2px solid var(--BORDER-COLOR);
+  font-size: 3em;
+  font-family:"itc_benguiat_stdbold"
+}
+
+h2 {
+  font-family: 'itc_benguiat_stdbook';
+  font-size: 1.5em;
+}
+
+h3 {
+  font-family: 'itc_benguiat_stdbook';
+  font-size: 1em;
 }
 
 .public__main{
-  
-  border: 2px solid var(--BORDER-COLOR);
-  border-radius: 20px;
+  background: url(./img/background.jpg) ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment:local;
+  border: 8px solid #404258;
   min-height: 100vh;
 }
 
@@ -185,11 +239,12 @@ h1 {
 
 .buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 200px;
-  gap: 30%;
 }
+
+
 
 
 
