@@ -4,7 +4,7 @@ import Logo from "../img/logo.svg";
 const Public = () => {
   const content = (
     <section className="public">
-      <section className="navbar">
+      <section className="navbar header__text">
         <ul className="flex">
           <li>
             <img src={Logo} className="logo" alt="logo" />
@@ -23,9 +23,12 @@ const Public = () => {
           <h1 className="titles main__title">CHOOSE YOUR OWN ADVENTURE</h1>
           <h3 className="titles third__title">FACE THE CONSEQUENCES</h3>
           <div className="buttons container">
-            <button className="main__button">Random Read</button>
-            <button className="main__button1">Browse stories</button>
-            <button className="main__button">Write</button>
+            <Link to="dash/stories">
+              <button className="main__button">Browse stories</button>
+            </Link>
+            <Link to="dash/stories/new">
+              <button className="main__button">Write a story</button>
+            </Link>
           </div>
         </div>
       </main>

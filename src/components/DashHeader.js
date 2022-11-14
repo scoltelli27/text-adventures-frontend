@@ -8,7 +8,7 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-
+import Logo from "../img/logo.svg";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 
 import useAuth from "../hooks/useAuth";
@@ -116,18 +116,30 @@ const DashHeader = () => {
     );
   }
 
+  const onGoHomeClicked = () => navigate("/");
+
   const content = (
     <>
       <p className={errClass}>{error?.data?.message}</p>
 
-      <header className="dash-header">
-        <div className={`dash-header__container ${dashClass}`}>
-          <Link to="/dash">
-            <h1 className="dash-header__title">techStories</h1>
-          </Link>
-          <nav className="dash-header__nav">{buttonContent}</nav>
-        </div>
-      </header>
+      <section className="navbar public header__text">
+        <ul className="flex">
+          <li>
+            <img
+              src={Logo}
+              className="logo"
+              alt="logo"
+              onClick={onGoHomeClicked}
+            />
+          </li>
+          <li>
+            <span>Text adventures</span>
+          </li>
+          <li>
+            <Link to="/login">Log in</Link>
+          </li>
+        </ul>
+      </section>
     </>
   );
 

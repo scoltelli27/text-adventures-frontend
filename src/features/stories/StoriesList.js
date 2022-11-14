@@ -26,31 +26,9 @@ const StoriesList = () => {
       : null;
 
     content = (
-      <table className="table table--stories">
-        <thead className="table__thead">
-          <tr>
-            <th scope="col" className="table__th story__status">
-              Story Number
-            </th>
-            <th scope="col" className="table__th story__created">
-              Created
-            </th>
-            <th scope="col" className="table__th story__updated">
-              Updated
-            </th>
-            <th scope="col" className="table__th story__updated">
-              Title
-            </th>
-            <th scope="col" className="table__th story__title">
-              Story
-            </th>
-            <th scope="col" className="table__th story__edit">
-              Edit
-            </th>
-          </tr>
-        </thead>
-        <tbody>{tableContent}</tbody>
-      </table>
+      <div className="public story__border">
+        <div className="story__grid">{tableContent}</div>
+      </div>
     );
   }
 

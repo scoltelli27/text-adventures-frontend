@@ -11,12 +11,14 @@ const NewStoryForm = ({ users }) => {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
+  const [summary, setSummary] = useState("");
   const [text, setText] = useState("");
   const [userId, setUserId] = useState(users[0].id);
 
   useEffect(() => {
     if (isSuccess) {
       setTitle("");
+      setSummary("");
       setText("");
       setUserId("");
       navigate("/dash/stories");
@@ -24,15 +26,15 @@ const NewStoryForm = ({ users }) => {
   }, [isSuccess, navigate]);
 
   const onTitleChanged = (e) => setTitle(e.target.value);
+  const onSummaryChanged = (e) => setSummary(e.target.value);
   const onTextChanged = (e) => setText(e.target.value);
-  const onUserIdChanged = (e) => setUserId(e.target.value);
 
-  const canSave = [title, text, userId].every(Boolean) && !isLoading;
+  const canSave = [title, summary, text, userId].every(Boolean) && !isLoading;
 
   const onSaveStoryClicked = async (e) => {
     e.preventDefault();
     if (canSave) {
-      await addNewStory({ user: userId, title, text });
+      await addNewStory({ user: userId, title, summary, text });
     }
   };
 
@@ -47,6 +49,7 @@ const NewStoryForm = ({ users }) => {
 
   const errClass = isError ? "errmsg" : "offscreen";
   const validTitleClass = !title ? "form__input--incomplete" : "";
+  const validSummaryClass = !summary ? "form__input--incomplete" : "";
   const validTextClass = !text ? "form__input--incomplete" : "";
 
   const content = (
@@ -75,6 +78,16 @@ const NewStoryForm = ({ users }) => {
           onChange={onTitleChanged}
         />
 
+        <label className="form__label" htmlFor="summary">
+          Summary:
+        </label>
+        <textarea
+          className={`form__input form__input--summary ${validSummaryClass}`}
+          id="summary"
+          name="summary"
+          value={summary}
+          onChange={onSummaryChanged}
+        />
         <label className="form__label" htmlFor="text">
           Text:
         </label>

@@ -5,7 +5,7 @@ import {
 } from "./storiesApiSlice";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const EditStoryForm = ({ story, users }) => {
   const [updateStory, { isLoading, isSuccess, isError, error }] =
@@ -81,101 +81,37 @@ const EditStoryForm = ({ story, users }) => {
 
   const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
+  const goBack = () => navigate(`/dash/stories`);
+
   const content = (
     <>
       <p className={errClass}>{errContent}</p>
 
-      <form className="form" onSubmit={(e) => e.preventDefault()}>
-        <div className="form__title-row">
-          <h2>Edit Story #{story.ticket}</h2>
-          <div className="form__action-buttons">
-            <button
-              className="icon-button"
-              title="Save"
-              onClick={onSaveStoryClicked}
-              disabled={!canSave}
-            >
-              <FontAwesomeIcon icon={faSave} />
-            </button>
-            <button
-              className="icon-button"
-              title="Delete"
-              onClick={onDeleteStoryClicked}
-            >
-              <FontAwesomeIcon icon={faTrashCan} />
-            </button>
-          </div>
-        </div>
-        <label className="form__label" htmlFor="story-title">
-          Title:
-        </label>
-        <input
-          className={`form__input ${validTitleClass}`}
-          id="story-title"
-          name="title"
-          type="text"
-          autoComplete="off"
-          value={title}
-          onChange={onTitleChanged}
-        />
+      <section className="main__story">
+        <h2 className="story__name">Welcome to "{story.title}" </h2>
 
-        <label className="form__label" htmlFor="story-text">
-          Text:
-        </label>
-        <textarea
-          className={`form__input form__input--text ${validTextClass}`}
-          id="story-text"
-          name="text"
-          value={text}
-          onChange={onTextChanged}
-        />
-        <div className="form__row">
-          <div className="form__divider">
-            <label
-              className="form__label form__checkbox-container"
-              htmlFor="story-completed"
-            >
-              WORK COMPLETE:
-              <input
-                className="form__checkbox"
-                id="story-completed"
-                name="completed"
-                type="checkbox"
-                checked={completed}
-                onChange={onCompletedChanged}
-              />
-            </label>
-
-            <label
-              className="form__label form__checkbox-container"
-              htmlFor="story-username"
-            >
-              ASSIGNED TO:
-            </label>
-            <select
-              id="story-username"
-              name="username"
-              className="form__select"
-              value={userId}
-              onChange={onUserIdChanged}
-            >
-              {options}
-            </select>
-          </div>
-          <div className="form__divider">
-            <p className="form__created">
-              Created:
-              <br />
-              {created}
-            </p>
-            <p className="form__updated">
-              Updated:
-              <br />
-              {updated}
-            </p>
-          </div>
+        <div className="text__area">{story.text}</div>
+        <div>
+          <h3>Back to stories</h3>
+          <FontAwesomeIcon
+            className="go__back"
+            onClick={goBack}
+            icon={faArrowLeft}
+          />
         </div>
-      </form>
+        <div className="story__divider">
+          <p className="story__created">
+            Story created on:
+            <br />
+            {created}
+          </p>
+          <p className="story__updated">
+            Last updated:
+            <br />
+            {updated}
+          </p>
+        </div>
+      </section>
     </>
   );
 

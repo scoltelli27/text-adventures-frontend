@@ -3,7 +3,6 @@ import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
-import { ROLES } from "../../config/roles";
 
 const USER_REGEX = /^[a-zA-Z0-9]+$/;
 const PWD_REGEX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -33,20 +32,12 @@ const NewUserForm = () => {
       setUsername("");
       setPassword("");
       setRoles([]);
-      navigate("/dash/users");
+      navigate("/dash/stories");
     }
   }, [isSuccess, navigate]);
 
   const onUsernameChanged = (e) => setUsername(e.target.value);
   const onPasswordChanged = (e) => setPassword(e.target.value);
-
-  const onRolesChanged = (e) => {
-    const values = Array.from(
-      e.target.selectedOptions, //HTMLCollection
-      (option) => option.value
-    );
-    setRoles(values);
-  };
 
   const canSave =
     [roles.length, validUsername, validPassword].every(Boolean) && !isLoading;
@@ -58,37 +49,20 @@ const NewUserForm = () => {
     }
   };
 
-  const options = Object.values(ROLES).map((role) => {
-    return (
-      <option key={role} value={role}>
-        {" "}
-        {role}
-      </option>
-    );
-  });
-
   const errClass = isError ? "errmsg" : "offscreen";
   const validUserClass = !validUsername ? "form__input--incomplete" : "";
   const validPwdClass = !validPassword ? "form__input--incomplete" : "";
-  const validRolesClass = !Boolean(roles.length)
-    ? "form__input--incomplete"
-    : "";
 
   const content = (
     <>
       <p className={errClass}>{error?.data?.message}</p>
 
-      <form className="form" onSubmit={onSaveUserClicked}>
+      <form className="form container" onSubmit={onSaveUserClicked}>
         <div className="form__title-row">
           <h2>New User</h2>
-          <div className="form__action-buttons">
-            <button className="icon-button" title="Save" disabled={!canSave}>
-              <FontAwesomeIcon icon={faSave} />
-            </button>
-          </div>
         </div>
         <label className="form__label" htmlFor="username">
-          Username: <span className="nowrap">[3-20 letters]</span>
+          Username:<br></br> <span className="nowrap">[3-20 letters]</span>
         </label>
         <input
           className={`form__input ${validUserClass}`}
@@ -101,7 +75,10 @@ const NewUserForm = () => {
         />
 
         <label className="form__label" htmlFor="password">
-          Password: <span className="nowrap">[4-12 chars incl. !@#$%]</span>
+          Password: <br></br>
+          <span className="nowrap">
+            [4-12, must include letters, numbers, and a special character.]
+          </span>
         </label>
         <input
           className={`form__input ${validPwdClass}`}
@@ -111,21 +88,11 @@ const NewUserForm = () => {
           value={password}
           onChange={onPasswordChanged}
         />
-
-        <label className="form__label" htmlFor="roles">
-          ASSIGNED ROLES:
-        </label>
-        <select
-          id="roles"
-          name="roles"
-          className={`form__select ${validRolesClass}`}
-          multiple={true}
-          size="3"
-          value={roles}
-          onChange={onRolesChanged}
-        >
-          {options}
-        </select>
+        <div className="form__action-buttons">
+          <button className="icon-button" title="Save" disabled={!canSave}>
+            <FontAwesomeIcon icon={faSave} />
+          </button>
+        </div>
       </form>
     </>
   );

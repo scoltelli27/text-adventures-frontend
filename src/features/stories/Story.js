@@ -21,29 +21,24 @@ const Story = ({ storyId }) => {
       month: "long",
     });
 
-    const handleEdit = () => navigate(`/dash/stories/${storyId}`);
+    const handleRead = () => navigate(`/dash/stories/${storyId}`);
 
     return (
-      <tr className="table__row">
-        {/* <td className="table__cell story__status">
-          {story.read ? (
-            <span className="story__status--completed">Read</span>
-          ) : (
-            <span className="story__status--open">Unread</span>
-          )}
-        </td> */}
-        <td className="table__cell story__created">{story.storyNumber}</td>
-        <td className="table__cell story__created">{created}</td>
-        <td className="table__cell story__updated">{updated}</td>
-        <td className="table__cell story__title">{story.title}</td>
-        <td className="table__cell story__username">{story.text}</td>
-
-        <td className="table__cell">
-          <button className="icon-button table__button" onClick={handleEdit}>
-            <FontAwesomeIcon icon={faPenToSquare} />
-          </button>
-        </td>
-      </tr>
+      <>
+        <div className="story__item">
+          <div className="story__title">
+            #{story.storyNumber}
+            {` ${story.title}`}
+          </div>
+          <div className="story__text">{story.summary}</div>
+          {/* <div className="story__text">{story.text}</div> */}
+          <div className="button__space">
+            <button className="story__button" onClick={handleRead}>
+              Read
+            </button>
+          </div>
+        </div>
+      </>
     );
   } else return null;
 };

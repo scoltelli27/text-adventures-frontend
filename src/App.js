@@ -24,34 +24,30 @@ function App() {
         <Route path="login" element={<Login />} />
 
         {/* Protected routes */}
-        <Route element={<PersistLogin />}>
-          <Route
-            element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
-          >
-            <Route element={<Prefetch />}>
-              <Route path="dash" element={<DashLayout />}>
-                <Route index element={<Welcome />} />
+        {/* <Route element={<PersistLogin />}> */}
+        <Route element={<Prefetch />}>
+          <Route path="dash" element={<DashLayout />}>
+            <Route index element={<Welcome />} />
 
-                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                  <Route path="users">
-                    <Route index element={<UsersList />} />
-                    <Route path=":id" element={<EditUser />} />
-                    <Route path="new" element={<NewUserForm />} />
-                  </Route>
-                </Route>
+            {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}> */}
+            <Route path="users">
+              <Route index element={<UsersList />} />
+              <Route path=":id" element={<EditUser />} />
+              <Route path="new" element={<NewUserForm />} />
+            </Route>
+            {/* </Route> */}
 
-                <Route path="stories">
-                  <Route index element={<StoriesList />} />
-                  <Route path=":id" element={<EditStory />} />
-                  <Route path="new" element={<NewStory />} />
-                </Route>
-              </Route>
-              {/* End Dash */}
+            <Route path="stories">
+              <Route index element={<StoriesList />} />
+              <Route path=":id" element={<EditStory />} />
+              <Route path="new" element={<NewStory />} />
             </Route>
           </Route>
+          {/* End Dash */}
         </Route>
-        {/* End protected routes */}
       </Route>
+      {/* </Route> */}
+      {/* End protected routes */}
     </Routes>
   );
 }
